@@ -17,7 +17,7 @@ const categoryGradients = {
   'Business': 'from-[#8E2DE2] to-[#4A00E0]',
   'Data Analytics': 'from-[#00B4DB] to-[#0083B0]',
   'Productivity': 'from-[#F6D365] to-[#FDA085]',
-  'default': 'from-[#FF4D6D] to-[#FF4D94]'
+  'default': 'from-[#1E90FF] to-[#00BFFF]'
 };
 
 const Hero = ({ title, subtitle, icon, category }) => {
@@ -26,7 +26,7 @@ const Hero = ({ title, subtitle, icon, category }) => {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   } : {
-    backgroundColor: '#FF4D6D',
+    backgroundColor: '#1E90FF',
   };
 
   const gradientClass = category ? categoryGradients[category] : categoryGradients.default;
@@ -45,7 +45,7 @@ const Hero = ({ title, subtitle, icon, category }) => {
         <div className="absolute inset-0 bg-black opacity-40"></div>
       )}
 
-      {/* Main gradient overlay - made more solid for main banner */}
+      {/* Main gradient overlay */}
       <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass} ${
         category ? 'opacity-70' : 'opacity-95'
       }`}></div>

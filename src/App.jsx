@@ -5,6 +5,7 @@ import SubcategoriesView from './components/prompts/SubcategoriesView';
 import PromptsView from './components/prompts/PromptsView';
 import Breadcrumb from './components/common/Breadcrumb';
 import Hero from './components/layout/Hero';
+import ImageShowcase from './components/showcase/ImageShowcase';
 import './App.css';
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
           />
         )}
       </div>
+      <ImageShowcase />
     </div>
   );
 }
