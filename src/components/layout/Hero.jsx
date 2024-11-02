@@ -11,13 +11,13 @@ const categoryBackgrounds = {
 };
 
 const categoryGradients = {
-  'Marketing': 'from-[#FF6B6B] to-[#FF4D4D]', // Vibrant coral red
-  'Sales': 'from-[#4158D0] to-[#C850C0]', // Electric blue to magenta
-  'Writing': 'from-[#0093E9] to-[#80D0C7]', // Ocean blue to turquoise
-  'Business': 'from-[#8E2DE2] to-[#4A00E0]', // Royal purple
-  'Data Analytics': 'from-[#00B4DB] to-[#0083B0]', // Bright cyan to azure
-  'Productivity': 'from-[#F6D365] to-[#FDA085]', // Sunny yellow to peach
-  'default': 'from-[#FF6B6B] to-[#FF4D4D]' // Default gradient for home page
+  'Marketing': 'from-[#FF6B6B] to-[#FF4D4D]',
+  'Sales': 'from-[#4158D0] to-[#C850C0]',
+  'Writing': 'from-[#0093E9] to-[#80D0C7]',
+  'Business': 'from-[#8E2DE2] to-[#4A00E0]',
+  'Data Analytics': 'from-[#00B4DB] to-[#0083B0]',
+  'Productivity': 'from-[#F6D365] to-[#FDA085]',
+  'default': 'from-[#FF7C7C] via-[#FF6B88] to-[#FF4D94]' // Canva-like gradient
 };
 
 const Hero = ({ title, subtitle, icon, category }) => {
@@ -66,12 +66,12 @@ const Hero = ({ title, subtitle, icon, category }) => {
                 {icon}
               </motion.span>
             )}
-            <h1 className="text-2xl sm:text-4xl font-bold drop-shadow-lg">
+            <h1 className="text-2xl sm:text-4xl font-normal tracking-wide" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
               {title}
             </h1>
           </div>
           {subtitle && (
-            <p className="text-sm sm:text-lg text-white/90 max-w-3xl mx-auto font-light">
+            <p className="text-sm sm:text-lg text-white/90 max-w-3xl mx-auto font-light tracking-wide">
               {subtitle}
             </p>
           )}

@@ -54,16 +54,13 @@ const CategoriesGrid = ({ categories, onSelectCategory }) => {
                   <div className={`absolute inset-0 bg-gradient-to-r ${cardConfig.color} opacity-0 group-hover:opacity-30 transition-opacity duration-300 mix-blend-overlay`}></div>
                 </div>
                 
-                <div className="relative p-6">
+                <div className="relative p-4">
                   <div className="flex items-center space-x-2">
-                    <span className="text-2xl">{category.icon}</span>
-                    <h3 className="text-2xl font-semibold text-gray-800 group-hover:text-[#FF4D00] transition-colors duration-300">
+                    <span className="text-xl text-gray-500">{category.icon}</span>
+                    <h3 className="text-lg font-normal text-gray-600 group-hover:text-[#FF4D00] transition-colors duration-300">
                       {category.title}
                     </h3>
                   </div>
-                  <p className="mt-2 text-gray-600">
-                    {category.subcategories.length} subcategories
-                  </p>
                 </div>
               </div>
             </motion.div>
