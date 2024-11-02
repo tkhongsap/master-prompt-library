@@ -38,30 +38,48 @@ const CategoriesGrid = ({ categories, onSelectCategory }) => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              whileHover={{ 
+                y: -8,
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
               transition={{ delay: index * 0.1 }}
               key={category.title}
               onClick={() => onSelectCategory(category)}
-              className="group relative bg-white rounded-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2 hover:scale-105"
+              className="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
               <div className="relative bg-white rounded-xl overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
-                  <img 
+                  <motion.img 
                     src={cardConfig.image}
                     alt={category.title}
-                    className="w-full h-full object-cover transform transition-all duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.15 }}
+                    transition={{ duration: 0.6 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-75 transition-opacity duration-300 from-transparent to-black/50"></div>
-                  <div className={`absolute inset-0 bg-gradient-to-r ${cardConfig.color} opacity-0 group-hover:opacity-30 transition-opacity duration-300 mix-blend-overlay`}></div>
+                  <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-75 transition-all duration-300 from-transparent to-black/50"></div>
+                  <div className={`absolute inset-0 bg-gradient-to-r ${cardConfig.color} opacity-0 group-hover:opacity-40 transition-all duration-300 mix-blend-overlay`}></div>
                 </div>
                 
                 <div className="relative p-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl text-gray-500">{category.icon}</span>
-                    <h3 className="text-lg font-normal text-gray-600 group-hover:text-[#FF4D00] transition-colors duration-300">
+                  <motion.div 
+                    className="flex items-center space-x-2"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="text-xl text-gray-500 group-hover:scale-110 transition-transform duration-300">
+                      {category.icon}
+                    </span>
+                    <h3 className="text-lg font-normal text-gray-600 group-hover:text-[#FF4D00] transition-all duration-300">
                       {category.title}
                     </h3>
-                  </div>
+                  </motion.div>
                 </div>
+              </div>
+
+              {/* Hover overlay with subtle border glow */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/20 to-white/0 mix-blend-overlay"></div>
               </div>
             </motion.div>
           );
