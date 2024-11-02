@@ -1,53 +1,84 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Hero = () => {
+const categoryBackgrounds = {
+  'Marketing': 'https://images.unsplash.com/photo-1552664730-d307ca884978',
+  'Sales': 'https://images.unsplash.com/photo-1521791136064-7986c2920216',
+  'Writing': 'https://images.unsplash.com/photo-1542435503-956c469947f6',
+  'Business': 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0',
+  'Data Analytics': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
+  'Productivity': 'https://images.unsplash.com/photo-1483058712412-4245e9b90334',
+};
+
+const categoryGradients = {
+  'Marketing': 'from-[#FF6B6B] to-[#FF4D4D]', // Vibrant coral red
+  'Sales': 'from-[#4158D0] to-[#C850C0]', // Electric blue to magenta
+  'Writing': 'from-[#0093E9] to-[#80D0C7]', // Ocean blue to turquoise
+  'Business': 'from-[#8E2DE2] to-[#4A00E0]', // Royal purple
+  'Data Analytics': 'from-[#00B4DB] to-[#0083B0]', // Bright cyan to azure
+  'Productivity': 'from-[#F6D365] to-[#FDA085]', // Sunny yellow to peach
+  'default': 'from-[#FF6B6B] to-[#FF4D4D]' // Default gradient for home page
+};
+
+const Hero = ({ title, subtitle, icon, category }) => {
+  const style = category ? {
+    backgroundImage: `url(${categoryBackgrounds[category]})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  } : {};
+
+  const gradientClass = category ? categoryGradients[category] : categoryGradients.default;
+
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="relative min-h-[180px] bg-gradient-to-r from-pink-500 via-[#FF4D00] to-orange-500 overflow-hidden"
+    <div 
+      className={`relative overflow-hidden w-full ${
+        category 
+          ? 'bg-gray-900' 
+          : 'bg-gradient-to-r ' + gradientClass
+      } text-white py-6 sm:py-8`}
+      style={style}
     >
-      {/* Animated pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute w-64 h-64 bg-white rounded-full blur-3xl -top-32 -left-32 animate-pulse"></div>
-        <div className="absolute w-64 h-64 bg-white rounded-full blur-3xl -bottom-32 -right-32 animate-pulse delay-1000"></div>
-      </div>
+      {/* Overlay for category backgrounds */}
+      {category && (
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+      )}
 
-      {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-4 py-10 sm:py-14 flex flex-col items-center justify-center text-center">
-        <motion.h1 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-3xl sm:text-4xl font-bold text-white mb-3 tracking-tight"
-        >
-          Master Prompts
-        </motion.h1>
-        
-        <motion.p 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-base sm:text-lg text-white/90 mb-5 max-w-2xl"
-        >
-          Discover proven prompt templates for better ChatGPT results
-        </motion.p>
+      {/* Main gradient overlay with reduced opacity */}
+      <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass} ${
+        category ? 'opacity-70' : 'opacity-100'
+      }`}></div>
 
-        <motion.button 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-white text-[#FF4D00] px-6 py-2.5 rounded-lg text-base font-semibold hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl"
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
         >
-          Get Started Free
-        </motion.button>
+          <div className="flex items-center justify-center space-x-3 mb-2">
+            {icon && (
+              <motion.span 
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-2xl sm:text-3xl"
+              >
+                {icon}
+              </motion.span>
+            )}
+            <h1 className="text-2xl sm:text-4xl font-bold drop-shadow-lg">
+              {title}
+            </h1>
+          </div>
+          {subtitle && (
+            <p className="text-sm sm:text-lg text-white/90 max-w-3xl mx-auto font-light">
+              {subtitle}
+            </p>
+          )}
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
-export default Hero; 
+export default Hero;

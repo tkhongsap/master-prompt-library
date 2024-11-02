@@ -43,10 +43,6 @@ const CategoriesGrid = ({ categories, onSelectCategory }) => {
               onClick={() => onSelectCategory(category)}
               className="group relative bg-white rounded-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2 hover:scale-105"
             >
-              {/* Glowing border effect */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 rounded-xl blur transition duration-300 group-hover:duration-200 animate-tilt bg-gradient-to-r from-[#FF4D00] to-orange-300"></div>
-              
-              {/* Card content */}
               <div className="relative bg-white rounded-xl overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <img 
@@ -54,30 +50,20 @@ const CategoriesGrid = ({ categories, onSelectCategory }) => {
                     alt={category.title}
                     className="w-full h-full object-cover transform transition-all duration-700 group-hover:scale-110"
                   />
-                  {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-75 transition-opacity duration-300 from-transparent to-black/50"></div>
-                  
-                  {/* Animated gradient overlay */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${cardConfig.color} opacity-0 group-hover:opacity-30 transition-opacity duration-300 mix-blend-overlay`}></div>
                 </div>
                 
-                <div className="relative p-6 bg-white">
-                  <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 group-hover:to-orange-50 transition-colors duration-300"></div>
-                  <div className="relative">
+                <div className="relative p-6">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl">{category.icon}</span>
                     <h3 className="text-2xl font-semibold text-gray-800 group-hover:text-[#FF4D00] transition-colors duration-300">
                       {category.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mt-2 group-hover:text-gray-700">
-                      {category.subcategories.length} templates available
-                    </p>
-                    
-                    {/* Animated arrow */}
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-4 transition-all duration-300">
-                      <svg className="w-6 h-6 text-[#FF4D00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </div>
                   </div>
+                  <p className="mt-2 text-gray-600">
+                    {category.subcategories.length} subcategories
+                  </p>
                 </div>
               </div>
             </motion.div>

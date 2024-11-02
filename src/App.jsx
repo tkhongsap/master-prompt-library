@@ -1,72 +1,95 @@
 import React, { useState } from 'react';
-import Breadcrumb from './components/common/Breadcrumb';
-import Hero from './components/layout/Hero';
-import QuickActions from './components/layout/QuickActions';
+import { categories } from './data/categories';
 import CategoriesGrid from './components/prompts/CategoriesGrid';
 import SubcategoriesView from './components/prompts/SubcategoriesView';
 import PromptsView from './components/prompts/PromptsView';
-import { categories } from './data/categories';
+import Breadcrumb from './components/common/Breadcrumb';
+import Hero from './components/layout/Hero';
+import './App.css';
 
 function App() {
-  const [navigationPath, setNavigationPath] = useState([]);
-  const [currentView, setCurrentView] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [navigationPath, setNavigationPath] = useState([]);
 
-  const handleNavigation = (level, item) => {
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+    setSelectedSubcategory(null);
+    setNavigationPath([category]);
+  };
+
+  const handleSubcategorySelect = (subcategory) => {
+    setSelectedSubcategory(subcategory);
+    setNavigationPath([selectedCategory, subcategory]);
+  };
+
+  const handleNavigate = (level, item) => {
     if (level === 'home') {
-      setNavigationPath([]);
-      setCurrentView('home');
       setSelectedCategory(null);
       setSelectedSubcategory(null);
+      setNavigationPath([]);
     } else if (level === 'category') {
-      setNavigationPath([item]);
-      setCurrentView('category');
       setSelectedCategory(item);
       setSelectedSubcategory(null);
-    } else if (level === 'subcategory') {
-      setNavigationPath([selectedCategory, item]);
-      setCurrentView('subcategory');
-      setSelectedSubcategory(item);
+      setNavigationPath([item]);
     }
   };
 
-  const renderView = () => {
-    switch (currentView) {
-      case 'home':
-        return (
-          <>
-            <Hero />
-            <QuickActions />
-            <CategoriesGrid 
-              categories={categories} 
-              onSelectCategory={(category) => handleNavigation('category', category)} 
-            />
-          </>
-        );
-      case 'category':
-        return (
-          <SubcategoriesView 
-            category={selectedCategory} 
-            onSelectSubcategory={(subcategory) => handleNavigation('subcategory', subcategory)} 
-          />
-        );
-      case 'subcategory':
-        return <PromptsView subcategory={selectedSubcategory} />;
-      default:
-        return null;
+  const renderHero = () => {
+    if (selectedCategory && selectedSubcategory) {
+      return (
+        <Hero
+          title={selectedSubcategory.title}
+          subtitle={`Explore ${selectedSubcategory.prompts.length} prompts for ${selectedCategory.title}`}
+          icon={selectedCategory.icon}
+          category={selectedCategory.title}
+        />
+      );
+    } else if (selectedCategory) {
+      return (
+        <Hero
+          title={selectedCategory.title}
+          subtitle={`Explore ${selectedCategory.subcategories.length} subcategories of ${selectedCategory.title} prompts`}
+          icon={selectedCategory.icon}
+          category={selectedCategory.title}
+        />
+      );
     }
+    return (
+      <Hero
+        title="Master Prompts"
+        subtitle="Explore our curated collection of professional prompt templates"
+        icon="✨"
+      />
+    );
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <Breadcrumb path={navigationPath} onNavigate={handleNavigation} />
-        </div>
-      </header>
+      {renderHero()}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Breadcrumb path={navigationPath} onNavigate={handleNavigate} />
+        
+        {!selectedCategory && (
+          <CategoriesGrid 
+            categories={categories} 
+            onSelectCategory={handleCategorySelect} 
+          />
+        )}
 
-      {renderView()}
+        {selectedCategory && !selectedSubcategory && (
+          <SubcategoriesView 
+            category={selectedCategory} 
+            onSelectSubcategory={handleSubcategorySelect}
+          />
+        )}
+
+        {selectedCategory && selectedSubcategory && (
+          <PromptsView 
+            subcategory={selectedSubcategory}
+          />
+        )}
+      </div>
     </div>
   );
 }
