@@ -17,7 +17,7 @@ const categoryGradients = {
   'Business': 'from-[#8E2DE2] to-[#4A00E0]',
   'Data Analytics': 'from-[#00B4DB] to-[#0083B0]',
   'Productivity': 'from-[#F6D365] to-[#FDA085]',
-  'default': 'from-[#FF7C7C] via-[#FF6B88] to-[#FF4D94]' // Canva-like gradient
+  'default': 'from-[#FF4D6D] to-[#FF4D94]'
 };
 
 const Hero = ({ title, subtitle, icon, category }) => {
@@ -25,7 +25,9 @@ const Hero = ({ title, subtitle, icon, category }) => {
     backgroundImage: `url(${categoryBackgrounds[category]})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-  } : {};
+  } : {
+    backgroundColor: '#FF4D6D',
+  };
 
   const gradientClass = category ? categoryGradients[category] : categoryGradients.default;
 
@@ -43,9 +45,9 @@ const Hero = ({ title, subtitle, icon, category }) => {
         <div className="absolute inset-0 bg-black opacity-40"></div>
       )}
 
-      {/* Main gradient overlay with reduced opacity */}
+      {/* Main gradient overlay - made more solid for main banner */}
       <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass} ${
-        category ? 'opacity-70' : 'opacity-100'
+        category ? 'opacity-70' : 'opacity-95'
       }`}></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +68,7 @@ const Hero = ({ title, subtitle, icon, category }) => {
                 {icon}
               </motion.span>
             )}
-            <h1 className="text-2xl sm:text-4xl font-normal tracking-wide" style={{ fontFamily: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" }}>
+            <h1 className="text-2xl sm:text-4xl font-normal tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>
               {title}
             </h1>
           </div>
