@@ -53,7 +53,7 @@ const CategoriesGrid = ({ categories, onSelectCategory }) => {
                   <motion.img 
                     src={cardConfig.image}
                     alt={category.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
                     whileHover={{ scale: 1.15 }}
                     transition={{ duration: 0.6 }}
                   />
@@ -67,10 +67,10 @@ const CategoriesGrid = ({ categories, onSelectCategory }) => {
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <span className="text-xl text-gray-500 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-xl text-gray-400 group-hover:text-gray-500 group-hover:scale-110 transition-all duration-300">
                       {category.icon}
                     </span>
-                    <h3 className="text-lg font-normal text-gray-600 group-hover:text-[#FF4D00] transition-all duration-300">
+                    <h3 className="text-lg font-normal text-gray-400 group-hover:text-[#FF4D00] transition-all duration-300">
                       {category.title}
                     </h3>
                   </motion.div>

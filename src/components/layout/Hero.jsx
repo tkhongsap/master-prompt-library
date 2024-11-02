@@ -8,6 +8,7 @@ const categoryBackgrounds = {
   'Business': 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0',
   'Data Analytics': 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
   'Productivity': 'https://images.unsplash.com/photo-1483058712412-4245e9b90334',
+  'default': 'https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=2000&q=80'
 };
 
 const categoryGradients = {
@@ -17,38 +18,33 @@ const categoryGradients = {
   'Business': 'from-[#8E2DE2] to-[#4A00E0]',
   'Data Analytics': 'from-[#00B4DB] to-[#0083B0]',
   'Productivity': 'from-[#F6D365] to-[#FDA085]',
-  'default': 'from-[#1E90FF] to-[#00BFFF]'
+  'default': 'from-[#4A90E2] via-[#5C6BC0] to-[#7E57C2]'
 };
 
 const Hero = ({ title, subtitle, icon, category }) => {
-  const style = category ? {
-    backgroundImage: `url(${categoryBackgrounds[category]})`,
+  const style = {
+    backgroundImage: `url(${category ? categoryBackgrounds[category] : categoryBackgrounds.default})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-  } : {
-    backgroundColor: '#1E90FF',
   };
 
   const gradientClass = category ? categoryGradients[category] : categoryGradients.default;
 
   return (
     <div 
-      className={`relative overflow-hidden w-full ${
-        category 
-          ? 'bg-gray-900' 
-          : 'bg-gradient-to-r ' + gradientClass
-      } text-white py-6 sm:py-8`}
+      className={`relative overflow-hidden w-full bg-gray-900 text-white py-6 sm:py-8`}
       style={style}
     >
-      {/* Overlay for category backgrounds */}
-      {category && (
-        <div className="absolute inset-0 bg-black opacity-40"></div>
-      )}
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      {/* Main gradient overlay */}
+      {/* Gradient overlay */}
       <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass} ${
-        category ? 'opacity-70' : 'opacity-95'
-      }`}></div>
+        category ? 'opacity-70' : 'opacity-85'
+      } mix-blend-multiply`}></div>
+
+      {/* Additional subtle patterns/effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#000_140%)] opacity-30"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
