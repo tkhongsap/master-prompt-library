@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { categories } from './data/categories';
+import { categories } from './data/categories/index';
 import CategoriesGrid from './components/prompts/CategoriesGrid';
 import SubcategoriesView from './components/prompts/SubcategoriesView';
 import PromptsView from './components/prompts/PromptsView';
